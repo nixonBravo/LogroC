@@ -19,6 +19,7 @@ use App\Http\Controllers\Personas;
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::controller(LogrocController::class)->group(function () {
         Route::get('all', 'all');
+        Route::get('cantones', 'cantones');
     });
 });
 
