@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RecintoElectoral;
+use Canton;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -51,10 +52,42 @@ class LogrocController extends Controller
 
     public function updateRecinto(Request $request, $id)
     {
-        
+        if (empty($request->recinto)) {
+            return response()->json([
+                'message' => "No se permiten campos vacios"
+            ], 400);
+        }
+
+
+        if (empty($id)) {
+
+            return response()->json([
+                'message' => "El id no puede estar vacio"
+            ], 401);
+        }
+        $recinto = RecintoElectoral::find($id);
+        if ($recinto->estado == false) {
+            return response()->json([
+                'message' => "El Registro ya ha sido eliminado anterioemente"
+            ], 204);
+        }
+
+        $recinto->recinto = $request->recinto;
+
+        $recinto->save();
+        return response()->json([
+            'message' => "Recinto Actualizado con Exito"
+        ], 200);
     }
 
-    public function parroquia()
+    public function parroquia($id)
     {
+        $canton = Canton::find($id);
+
+        $canton->parroquias()->estado = false;
+        $canton->save();
+        return response()->json([
+            'message' => "Parroquias Eliminadas"
+        ]);
     }
 }

@@ -10,8 +10,13 @@ class Canton extends Model
     use HasFactory;
     public $timestamps=false;
     protected $table = 'cantones';
-     
+
      protected $fillable = [
         'canton','provincia_id','estado'
     ];
+
+    public function parroquias()
+    {
+        return $this->hasMany(Parroquia::class);
+    }
 }

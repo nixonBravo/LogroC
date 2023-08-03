@@ -22,6 +22,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('cantones', 'cantones');
         Route::get('recintos', 'recintos');
         Route::put('updateRecinto/{id}', 'updateRecinto');
+        Route::delete('parroquia/{id}', 'parroquia');
     });
 });
 
