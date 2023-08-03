@@ -20,6 +20,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::controller(LogrocController::class)->group(function () {
         Route::get('all', 'all');
         Route::get('cantones', 'cantones');
+        Route::get('recintos', 'recintos');
+        Route::put('updateRecinto/{id}', 'updateRecinto');
     });
 });
 
