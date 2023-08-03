@@ -158,10 +158,10 @@ class LogrocController extends Controller
         ], 200);
     }
     /**
-     * Actualizar la información de un Persona
+     * Actualizar la información de Provincia
      * @OA\Put (
-     *     path="/api/personas/{id}",
-     *     tags={"Persona"},
+     *     path="/api/updateRecinto/{id}",
+     *     tags={"Logro C"},
      *     @OA\Parameter(
      *         in="path",
      *         name="id",
@@ -244,7 +244,33 @@ class LogrocController extends Controller
             'message' => "Recinto Actualizado con Exito"
         ], 200);
     }
-
+    /**
+     * Eliminar Parroquia
+     * @OA\Delete (
+     *     path="/api/parroquia/{id}",
+     *     tags={"Logro C"},
+     *     @OA\Parameter(
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="NO CONTENT",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="message", type="string", example="Eliminado con exito"),
+     *          )
+     *     ),
+     *      @OA\Response(
+     *          response=500,
+     *          description="NOT FOUND",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="message", type="string", example="No se pudo realizar correctamente la operación"),
+     *          )
+     *      )
+     * )
+     */
     public function parroquia($id)
     {
         $canton = Canton::find($id);
