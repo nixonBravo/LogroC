@@ -9,6 +9,47 @@ use Illuminate\Support\Facades\DB;
 
 class LogrocController extends Controller
 {
+    /**
+     * Listado de todo
+     * @OA\Get (
+     *     path="/api/all",
+     *     tags={"Logro C"},
+     *      security={{ "bearerAuth": {} }},
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 type="array",
+     *                 property="Datos",
+     *                 @OA\Items(
+     *                     type="object",
+     *                     @OA\Property(
+     *                         property="provincia",
+     *                         type="string",
+     *                         example="Manabi"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="canton",
+     *                         type="string",
+     *                         example="Chone"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="parroquia",
+     *                         type="string",
+     *                         example="santa rita"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="recinto",
+     *                         type="string",
+     *                         example="cascsacas"
+     *                     )
+     *                 )
+     *             )
+     *         )
+     *     )
+     * )
+     */
     public function all()
     {
         $datos = DB::table('provincias')
@@ -22,7 +63,38 @@ class LogrocController extends Controller
             'Datos' => $datos
         ], 200);
     }
-
+    /**
+     * Listado de todo
+     * @OA\Get (
+     *     path="/api/cantones",
+     *     tags={"Logro C"},
+     *      security={{ "bearerAuth": {} }},
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 type="array",
+     *                 property="Datos",
+     *                 @OA\Items(
+     *                     type="object",
+     *                      @OA\Property(
+     *                         property="canton",
+     *                         type="string",
+     *                         example="Chone"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="provincia",
+     *                         type="string",
+     *                         example="Manabi"
+     *                     ),
+     *
+     *                 )
+     *             )
+     *         )
+     *     )
+     * )
+     */
     public function cantones()
     {
         $datos = DB::table('provincias')

@@ -100,7 +100,49 @@ class AuthController extends Controller
             ], 500);
         }
     }
-
+    /**
+     * @OA\POST(
+     *  tags={"Sanctum Authentication"},
+     *  summary="Login de Usuarios",
+     *  description="Este endpoint permite Loguearse.",
+     *  path="/api/auth/login",
+     *  @OA\RequestBody(
+     *      @OA\MediaType(
+     *          mediaType="multipart/form-data",
+     *          @OA\Schema(
+     *              required={"email", "password"},
+     *              @OA\Property(property="email", type="string", example="miguel_nunes@example.org"),
+     *              @OA\Property(property="password", type="string", example="#sdasd$ssdaAA@"),
+     *          )
+     *      ),
+     *  ),
+     *  @OA\Response(
+     *    response=200,
+     *    description="Usuario Logueado con Exito.",
+     *    @OA\JsonContent(
+     *      @OA\Property(property="status", type="boolean", example="true"),
+     *       @OA\Property(property="message", type="string", example="User Logged In Successfully"),
+     *       @OA\Property(property="plainTextToken", type="string", example="2|MZEBxLy1zulPtND6brlf8GOPy57Q4DwYunlibXGj")
+     *    )
+     *  ),
+     * @OA\Response(
+     *    response=401,
+     *    description="Campos Vacios.",
+     *    @OA\JsonContent(
+     *      @OA\Property(property="status", type="boolean", example="false"),
+     *       @OA\Property(property="message", type="string", example="validation error.")
+     *    )
+     *  ),
+     * @OA\Response(
+     *    response=400,
+     *    description="Desconocido.",
+     *    @OA\JsonContent(
+     * @OA\Property(property="status", type="boolean", example="false"),
+     *       @OA\Property(property="message", type="string", example="Email & Password does not match with our record")
+     *    )
+     *  ),
+     * )
+     */
     public function loginUser(Request $request)
     {
         try {
@@ -122,7 +164,7 @@ class AuthController extends Controller
                 return response()->json([
                     'status' => false,
                     'message' => 'Email & Password does not match with our record.',
-                ], 401);
+                ], 400);
             }
 
             $user = User::where('email', $request->email)->first();
