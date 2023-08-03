@@ -107,7 +107,43 @@ class LogrocController extends Controller
             'Datos' => $datos
         ], 200);
     }
-
+    /**
+     * Listado de todo
+     * @OA\Get (
+     *     path="/api/cantones",
+     *     tags={"Logro C"},
+     *      security={{ "bearerAuth": {} }},
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 type="array",
+     *                 property="Datos",
+     *                 @OA\Items(
+     *                     type="object",
+     *                      @OA\Property(
+     *                         property="provincia",
+     *                         type="string",
+     *                         example="Manabi"
+     *                     ),
+     *                      @OA\Property(
+     *                         property="canton",
+     *                         type="string",
+     *                         example="Chone"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="parroquia",
+     *                         type="string",
+     *                         example="san antonio"
+     *                     ),
+     *
+     *                 )
+     *             )
+     *         )
+     *     )
+     * )
+     */
     public function recintos()
     {
         $datos = DB::table('provincias')
