@@ -157,7 +157,64 @@ class LogrocController extends Controller
             'Datos' => $datos
         ], 200);
     }
-
+    /**
+     * Actualizar la información de un Persona
+     * @OA\Put (
+     *     path="/api/personas/{id}",
+     *     tags={"Persona"},
+     *     @OA\Parameter(
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                      type="object",
+     *                      @OA\Property(
+     *                          property="recinto",
+     *                          type="string"
+     *                      ),
+     *                 ),
+     *                 example={
+     *                     "recinto": "san antonio",
+     *                }
+     *             )
+     *         )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="success",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="message", type="string", example="Persona Update."),
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Campos Vacios",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="message", type="string", example="No se permiten campos vacios."),
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Id vacio",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="message", type="string", example="El id no puede estar vacio."),
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=204,
+     *          description="Ya eliminado",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="message", type="string", example="El Registro ya ha sido eliminado anterioemente."),
+     *          )
+     *      )
+     * )
+     */
     public function updateRecinto(Request $request, $id)
     {
         if (empty($request->recinto)) {
